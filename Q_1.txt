@@ -1,0 +1,74 @@
+Q-1 : Write a Java Program to implement Adapter pattern for Enumeration iterator
+
+Ans ->
+
+EnumerationIterator.java
+
+import java.util.*;
+
+class EnumerationIterator implements Iterator {
+	Enumeration enumeration;
+
+	public EnumerationIterator(Enumeration enumeration) {
+		this.enumeration = enumeration;
+	}
+
+	public boolean hasNext() {
+		return enumeration.hasMoreElements();
+	}
+
+	public Object next() {
+		return enumeration.nextElement();
+	}
+
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}
+}
+
+class EnumIterator {
+	public static void main (String args[]) {
+		Vector v = new 
+			Vector(Arrays.asList("JAVA","CPP","SQL","HTML"));
+	Iterator iterator = new EnumerationIterator(v.elements());
+	
+	while (iterator.hasNext()) {
+		System.out.println(iterator.next());
+	}
+	}
+}
+
+
+IterEnum.java
+
+import java.util.*;
+
+public class IterEnum 
+{
+	public static void main(String[] args)
+	{
+ 		String[] wordArr = {"Book", "Number", "Place", "Lemon", "Apple", "Tree"};
+ 		Vector<String> wordList = new Vector<>(Arrays.asList (wordArr)); 
+ 		System.out.println("\nThe word list: \n"+wordList + "\n");
+ 	
+ 		Enumeration<String> vectorEnum = wordList.elements(); 
+ 
+ 		while(vectorEnum.hasMoreElements()) 
+ 		{  
+			System.out.println(vectorEnum.nextElement());
+ 			System.out.println(vectorEnum.nextElement());
+ 		}
+ 
+		LinkedList<String> wordLinkedList = new LinkedList<>();
+		wordLinkedList.addAll(wordList); 
+		wordLinkedList.add("Ball");
+ 		wordLinkedList.add("Mango");
+	 	wordLinkedList.remove("Book");
+ 		System.out.println("\nThe word list (LinkedList): \n" + wordLinkedList + "\n");
+ 		Iterator<String> it =wordLinkedList.iterator(); 
+		while(it.hasNext()) 
+ 		{ 
+ 			System.out.println(it.next()); 
+ 		}
+	}
+}
